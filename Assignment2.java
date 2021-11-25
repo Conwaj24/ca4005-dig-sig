@@ -9,28 +9,41 @@ class Assignment2 implements Assignment2Interface {
 		Assignment2 a2 = new Assignment2();
 
 		// Generate a random secret key x with 0 < x < p-1
-		BigInteger privateKey = boundedRandom(0, primeModulus);
-		// Compute the public key y as y = gx (mod p)
+		BigInteger privateKey = boundedRandom(BigInteger.ZERO, primeModulus.subtract(BigInteger.ONE));
 		BigInteger publicKey = a2.generateY(generator, privateKey, primeModulus);
 
 		
 	}
-	/* the public key y and is generated from the given generator, secretKeyand modulus */
-	BigInteger generateY(BigInteger generator, BigInteger secretKey, BigInteger modulus);
+	/* the public key y and is generated from the given generator, secretKeyand modulus
+	 * Compute the public key y as y = gx (mod p)
+	 */
+	//TODO
+	public BigInteger generateY(BigInteger generator, BigInteger secretKey, BigInteger modulus) {
+		return BigInteger.ONE;
+	}
 	
 	/* the first part of the ElGamal signature from the given generator, random value k and modulus */
-	BigInteger generateR(BigInteger generator, BigInteger k, BigInteger modulus);
+	//TODO
+	public BigInteger generateR(BigInteger generator, BigInteger k, BigInteger modulus) {
+		return BigInteger.ONE;
+	}
 	
 	/* the second part of the ElGamal signature from the given plaintext, secretKey, first signature part r, random value k and modulus
 	 * s = (H(m)-xr)k^-1 (mod p-1) where H is the hash function SHA-256.*/
-	BigInteger generateS(byte[] plaintext, BigInteger secretKey, BigInteger r, BigInteger k, BigInteger modulus) {
-		return new BigInteger(sha256sum(plaintext)).subtract(secretKey.multiply(r)).multiply(calculateInverse(k)).mod(modulus.subtract(BigInteger.ONE));
+	public BigInteger generateS(byte[] plaintext, BigInteger secretKey, BigInteger r, BigInteger k, BigInteger modulus) {
+		return new BigInteger(sha256sum(plaintext)).subtract(secretKey.multiply(r)).multiply(calculateInverse(k, modulus.subtract(BigInteger.ONE)));
 	}
 
 	/* the GCD of the given val1 and val2 */
-	BigInteger calculateGCD(BigInteger val1, BigInteger val2);
+	//TODO
+	public BigInteger calculateGCD(BigInteger val1, BigInteger val2) {
+		return BigInteger.ONE;
+	}
 					
 	/* the modular inverse of the given val using the given modulus */
-	BigInteger calculateInverse(BigInteger val, BigInteger modulus);
+	//TODO
+	public BigInteger calculateInverse(BigInteger val, BigInteger modulus) {
+		return BigInteger.ONE;
+	}
 
 }

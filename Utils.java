@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.security.SecureRandom;
 
 public class Utils {
 	public static byte[] sha256sum (byte[] b) {
@@ -77,6 +78,11 @@ public class Utils {
 
 	public static int bitsToBytes(int bits) {
 		return bits / 8 + ((bits % 8 == 0) ? 0 : 1); //divide by 8 and round up
+	}
+
+	//TODO
+	public static BigInteger boundedRandom(BigInteger min, BigInteger max) {
+		return BigInteger.ONE;
 	}
 
 }
