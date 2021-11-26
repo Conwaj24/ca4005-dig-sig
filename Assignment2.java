@@ -12,7 +12,6 @@ class Assignment2 implements Assignment2Interface {
 		BigInteger privateKey = boundedRandom(BigInteger.ZERO, primeModulus.subtract(BigInteger.ONE));
 		BigInteger publicKey = a2.generateY(generator, privateKey, primeModulus);
 
-		
 	}
 	/* the public key y and is generated from the given generator, secretKeyand modulus
 	 * Compute the public key y as y = gx (mod p)
@@ -35,9 +34,12 @@ class Assignment2 implements Assignment2Interface {
 	}
 
 	/* the GCD of the given val1 and val2 */
-	//TODO
-	public BigInteger calculateGCD(BigInteger val1, BigInteger val2) {
-		return BigInteger.ONE;
+	public BigInteger calculateGCD(BigInteger a, BigInteger b) {
+		if (a.equals(BigInteger.ZERO))
+			{return b;}
+		if (b.equals(BigInteger.ZERO))
+			{return a;}
+		return calculateGCD(b, a.remainder(b));
 	}
 					
 	/* the modular inverse of the given val using the given modulus */
