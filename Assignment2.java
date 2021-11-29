@@ -14,20 +14,19 @@ class Assignment2 implements Assignment2Interface {
 
 	}
 	/* the public key y and is generated from the given generator, secretKey and modulus
-	 * Compute the public key y = g^x (mod p)
-	 */
+	* Compute the public key y = g^x (mod p)
+	*/
 	public BigInteger generateY(BigInteger generator, BigInteger secretKey, BigInteger modulus) {
 		return generator.modPow(secretKey, modulus);
 	}
-	
+
 	/* the first part of the ElGamal signature from the given generator, random value k and modulus */
-	//TODO
 	public BigInteger generateR(BigInteger generator, BigInteger k, BigInteger modulus) {
 		return generator.modPow(k, modulus);
 	}
-	
+
 	/* the second part of the ElGamal signature from the given plaintext, secretKey, first signature part r, random value k and modulus
-	 * s = (H(m)-xr)k^-1 (mod p-1) where H is the hash function SHA-256.*/
+	* s = (H(m)-xr)k^-1 (mod p-1) where H is the hash function SHA-256.*/
 	public BigInteger generateS(byte[] plaintext, BigInteger secretKey, BigInteger r, BigInteger k, BigInteger modulus) {
 		return new BigInteger(sha256sum(plaintext)).subtract(secretKey.multiply(r)).multiply(calculateInverse(k, modulus.subtract(BigInteger.ONE)));
 	}
@@ -40,11 +39,25 @@ class Assignment2 implements Assignment2Interface {
 			return a;
 		return calculateGCD(b, a.remainder(b));
 	}
-					
-	/* the modular inverse of the given val using the given modulus */
-	//TODO
-	public BigInteger calculateInverse(BigInteger val, BigInteger modulus) {
-		return BigInteger.ONE;
+
+	public BigInteger[] extendedGCD(BigInteger a, BigInteger b, BigInteger x, BigInteger y) {
+		if (a.equals(BigInteger.ZERO))
+			return new BigInteger[] {b, BigInteger.ZERO, BigInteger.ONE};
+
+		BigInteger[] gcd = extendedGCD(b, a.remainder(b), x, y);
+		return new BigInteger[] {
+			gcd[0],
+			gcd[2].subtract(b.divide(a).multiply(gcd[1])),
+			gcd[1]
+		};
 	}
 
+	public BigInteger[] extendedGCD(BigInteger a, BigInteger b) {
+		return extendedGCD(a,b,BigInteger.ZERO,BigInteger.ZERO);
+	}
+
+	/* the modular inverse of the given val using the given modulus */
+	public BigInteger calculateInverse(BigInteger val, BigInteger modulus) {
+		return extendedGCD(val, modulus)[1].mod(modulus).add(modulus).mod(modulus);
+	}
 }
