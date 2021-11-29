@@ -12,10 +12,16 @@ class Assignment2 implements Assignment2Interface {
 		BigInteger privateKey = boundedRandom(BigInteger.ZERO, primeModulus.subtract(BigInteger.ONE));
 		BigInteger publicKey = a2.generateY(generator, privateKey, primeModulus);
 
+		BigInteger k = boundedRandom(biggify(2), primeModulus.subtract(biggify(2)));
+		while (!a2.calculateGCD(k, primeModulus).equals(BigInteger.ONE))
+			k = boundedRandom(biggify(2), primeModulus.subtract(biggify(2)));
+		BigInteger r = a2.generateR(generator, k, primeModulus);
+
 	}
 	/* the public key y and is generated from the given generator, secretKey and modulus
 	* Compute the public key y = g^x (mod p)
 	*/
+
 	public BigInteger generateY(BigInteger generator, BigInteger secretKey, BigInteger modulus) {
 		return generator.modPow(secretKey, modulus);
 	}
