@@ -13,18 +13,17 @@ class Assignment2 implements Assignment2Interface {
 		BigInteger publicKey = a2.generateY(generator, privateKey, primeModulus);
 
 	}
-	/* the public key y and is generated from the given generator, secretKeyand modulus
-	 * Compute the public key y as y = gx (mod p)
+	/* the public key y and is generated from the given generator, secretKey and modulus
+	 * Compute the public key y = g^x (mod p)
 	 */
-	//TODO
 	public BigInteger generateY(BigInteger generator, BigInteger secretKey, BigInteger modulus) {
-		return BigInteger.ONE;
+		return generator.modPow(secretKey, modulus);
 	}
 	
 	/* the first part of the ElGamal signature from the given generator, random value k and modulus */
 	//TODO
 	public BigInteger generateR(BigInteger generator, BigInteger k, BigInteger modulus) {
-		return BigInteger.ONE;
+		return generator.modPow(k, modulus);
 	}
 	
 	/* the second part of the ElGamal signature from the given plaintext, secretKey, first signature part r, random value k and modulus
@@ -36,9 +35,9 @@ class Assignment2 implements Assignment2Interface {
 	/* the GCD of the given val1 and val2 */
 	public BigInteger calculateGCD(BigInteger a, BigInteger b) {
 		if (a.equals(BigInteger.ZERO))
-			{return b;}
+			return b;
 		if (b.equals(BigInteger.ZERO))
-			{return a;}
+			return a;
 		return calculateGCD(b, a.remainder(b));
 	}
 					
