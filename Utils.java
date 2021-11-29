@@ -129,6 +129,9 @@ public class Utils {
 		}
 		return new String(hexChars, StandardCharsets.UTF_8);
 	}
+	public static String hexEncode(BigInteger i) {
+		return hexEncode(i.toByteArray());
+	}
 
 	public static void writeFile(String path, String content) {
 		try (Writer writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream(path), "utf-8"))) {

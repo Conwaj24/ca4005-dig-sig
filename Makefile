@@ -4,12 +4,12 @@ TITLE = Assignment2
 ${TITLE}.class: Utils.class Assignment2Interface.class
 
 %.class: %.java
-	javac $<
+	javac -d . $<
 
 clean:
-	-rm -f *.class
+	-rm -fr *.class utils
 
 test: ${TITLE}.class
-	java ${TITLE}
+	java ${TITLE} $<
 
 .PHONY: clean test
