@@ -1,4 +1,4 @@
-import static utils.Utils.*;
+import static Utils.*;
 import java.math.BigInteger;
 
 class Assignment2 implements Assignment2Interface {
